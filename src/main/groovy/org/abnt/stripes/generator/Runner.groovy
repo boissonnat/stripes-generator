@@ -34,6 +34,7 @@ class Runner {
         // Launch generation steps
         createPom()
         createPackages()
+        createResources()
 
         println '\n'
         log.indentLog('A new Stripes project has been created : ')
@@ -108,6 +109,28 @@ class Runner {
         String packageTestStr = useGroovy ? '\t- src/test/groovy/' : '\t- src/test/java/'
         log.indentLog(packageTestStr + packageName.replaceAll("\\.", "\\/") + ' : Your test package')
         log.indentLog('\t- src/test/resources : Your test resources')
+    }
+
+    private void createResources(){
+        // Generate default resources first
+        def binding = [:]
+        binding['artifactId'] = artifactId
+
+        FileWriter writerDefault = new FileWriter(artifactId+File.separator+'src/main/resources/StripesResources.properties')
+        generateTemplate(binding, 'StripesResources', false, writerDefault)
+
+        boolean french = Asker.yesNoAsk("Would you like to use French language")
+        if (french){
+            FileWriter writerFrench = new FileWriter(artifactId+File.separator+'src/main/resources/StripesResources_fr.properties')
+            generateTemplate(binding, 'StripesResources_fr', false, writerFrench)
+        }
+        // Summary
+        println '\n'
+        log.indentLog('Localization files generated :')
+        log.indentLog('\t- Default language is english : /src/main/resources/StripesResources.properties')
+        if(french)
+            log.indentLog('\t- French language is available : /src/main/resources/StripesResources_fr.properties')
+
     }
 
     /***********************/

@@ -1,0 +1,62 @@
+
+# Resource strings used by the <stripes:errors> tag when there are no nested tags
+stripes.errors.header=<div style="color:#b72222; font-weight: bold">Les erreurs suivantes sont apparues:</div><ol>
+stripes.errors.beforeError=<li style="color: #b72222;">
+stripes.errors.afterError=</li>
+stripes.errors.footer=</ol>
+
+# Resource strings used by the <stripes:errors> tag when displaying errors for a
+# specific field (e.g. <stripes:errors field="password"/>). If not supplied the
+# values above will be used instead.
+stripes.fieldErrors.header=
+stripes.fieldErrors.beforeError=<span style="color: #b72222;">
+stripes.fieldErrors.afterError=</span><br />
+stripes.fieldErrors.footer=
+
+# Resource strings used by the stripes:messages tag
+stripes.messages.header=<ul class="messages">
+stripes.messages.beforeMessage=<li>
+stripes.messages.afterMessage=</li>
+stripes.messages.footer=</ul>
+
+# Validation error messages produced by Stripes' built-in converter classes. These
+# are default error messages and can be overridden on per-field and per-form levels.
+# Using the 'invalidNumber' error for a field 'age' of a form posting to
+# '/user/Profile.action', the keys looked for (in order) would be:
+#      1: /user/Profile.action.age.invalidNumber
+#      2: /user/Profile.action.age.errorMessage
+#      3: age.errorMessage
+#      4: /user/Profile.action.invalidNumber
+#      5: converter.number.invalidNumber
+converter.number.invalidNumber=La valeur ({1}) saisie dans le champ {0} doit être un nombre valide
+converter.byte.outOfRange=La valeur ({1}) saisie dans le champ {0} n'est pas comprise entre {2} et {3}
+converter.short.outOfRange=La valeur ({1}) saisie dans le champ {0} n'est pas comprise entre {2} et {3}
+converter.integer.outOfRange=La valeur ({1}) saisie dans le champ {0} n'est pas comprise entre {2} et {3}
+converter.float.outOfRange=La valeur ({1}) saisie dans le champ {0} n'est pas comprise entre {2} et {3}
+converter.enum.notAnEnumeratedValue=La valeur "{1}" n'est pas une valeur valide pour le champ {0}
+converter.date.invalidDate=La valeur ({1}) saisie dans le champ {0} doit être une date
+converter.email.invalidEmail=La valeur ({1}) saisie n'est pas une adresse email valide
+converter.creditCard.invalidCreditCard=La valeur ({1}) saisie n'est pas un numéro de carte bancaire valide
+
+# Validation error messages produced by Stripes' annotation based validations. These
+# are default error messages and can be overridden on per-field and per-form levels.
+# Using the 'valueNotPresent' required field error for a field 'username' of a form
+# posting to '/user/Register.action', the keys looked for (in order) would be:
+#      1: /user/Register.action.username.valueNotPresent
+#      2: /user/Register.action.username.errorMessage
+#      3: username.errorMessage
+#      4: /user/Register.action.valueNotPresent
+#      5: validation.required.valueNotPresent
+validation.required.valueNotPresent={0} est un champ requis
+validation.minlength.valueTooShort={0} doit contenir au moins {2} caractères
+validation.maxlength.valueTooLong={0} ne doit pas contenir plus de  {2} caractères
+validation.minvalue.valueBelowMinimum=La valeur minimale autorisée pour {0} est {2}
+validation.maxvalue.valueAboveMaximum=La valeur maximale autorisée pour {0} est {2}
+validation.mask.valueDoesNotMatch=<em>{1}</em> n'est pas valide{0}
+validation.expression.valueFailedExpression=La valeur ({1}) pour le champ {0} est invalide
+validation.file.postBodyTooBig=La taille totale du fichier uploade {3} KB dépasse la taille maximale autorisée :  {2} KB
+
+
+################################
+## $artifactId resources here ##
+################################
