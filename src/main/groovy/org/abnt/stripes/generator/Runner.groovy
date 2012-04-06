@@ -37,6 +37,11 @@ class Runner {
         createPom()
         createPackages()
 
+        log.indentLog('A new Stripes project has been created : ')
+        log.indentLog("\t cd $artifactId")
+        log.indentLog("\t Run Jetty with : mvn jetty:run")
+        log.indentLog("\t Point your browser at : http://localhost:8080/$artifactId")
+
     }
 
     private void createPom(){
@@ -51,7 +56,11 @@ class Runner {
         generateTemplate(binding, 'pom-xml', false, writer)
 
         // Summary
-        log.indentLog('- Maven pom.xml file created')
+        log.indentLog('Maven integration pom file created :')
+        log.indentLog('\t- All dependencies needed by Stripes v1.5.6 have been added')
+        log.indentLog('\t- ' + useGroovy ? 'Using Groovy language' : 'Using pure Java')
+        log.indentLog('\t- Jetty maven plugin configured (try jetty:run)')
+
     }
 
     private void createPackages(){
@@ -88,6 +97,14 @@ class Runner {
         if (!createDirectory(webApp)){
             log.error('An error occurs during the webapp directory creation')
         }
+
+        // Summary
+        log.indentLog('Some folders have been created')
+        log.indentLog('\t- src/main/' + useGroovy ? 'groovy/' : 'java/' + packageName.replaceAll("\\.", "\\/") + '/actions : Your actionBean package')
+        log.indentLog('\t- src/main/resources : Your applications resources')
+        log.indentLog('\t- src/main/webapp : Your web resources')
+        log.indentLog('\t- src/test/' + useGroovy ? 'groovy/' : 'java/' + packageName.replaceAll("\\.", "\\/") + ' : Your test package')
+        log.indentLog('\t- src/test/resources : Your test resources')
     }
 
     /***********************/
