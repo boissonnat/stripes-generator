@@ -28,8 +28,6 @@ class Runner {
         packageName = Asker.askWithDefault('Specify your package name', groupId+"."+artifactId).toLowerCase()
         useGroovy = Asker.yesNoAsk('Would you like to use Groovy language')
 
-        if (verbose) log.indentLog("A new project named [$artifactId] will be created")
-
         if (!createDirectory(artifactId))
             log.error("Unable to create project folder [$artifactId]. This is often due to a folder already named like that")
 
@@ -37,6 +35,7 @@ class Runner {
         createPom()
         createPackages()
 
+        println '\n'
         log.indentLog('A new Stripes project has been created : ')
         log.indentLog("\t cd $artifactId")
         log.indentLog("\t Run Jetty with : mvn jetty:run")
@@ -56,9 +55,10 @@ class Runner {
         generateTemplate(binding, 'pom-xml', false, writer)
 
         // Summary
+        println '\n'
         log.indentLog('Maven integration pom file created :')
         log.indentLog('\t- All dependencies needed by Stripes v1.5.6 have been added')
-        log.indentLog('\t- ' + useGroovy ? 'Using Groovy language' : 'Using pure Java')
+        log.indentLog(useGroovy ? '\t- Using Groovy language' : '\t- Using pure Java')
         log.indentLog('\t- Jetty maven plugin configured (try jetty:run)')
 
     }
@@ -99,11 +99,14 @@ class Runner {
         }
 
         // Summary
+        println '\n'
         log.indentLog('Some folders have been created')
-        log.indentLog('\t- src/main/' + useGroovy ? 'groovy/' : 'java/' + packageName.replaceAll("\\.", "\\/") + '/actions : Your actionBean package')
+        String packageSrcStr = useGroovy ? '\t- src/main/groovy/' : '\t- src/main/java/'
+        log.indentLog(packageSrcStr + packageName.replaceAll("\\.", "\\/") + '/actions : Your actionBean package')
         log.indentLog('\t- src/main/resources : Your applications resources')
         log.indentLog('\t- src/main/webapp : Your web resources')
-        log.indentLog('\t- src/test/' + useGroovy ? 'groovy/' : 'java/' + packageName.replaceAll("\\.", "\\/") + ' : Your test package')
+        String packageTestStr = useGroovy ? '\t- src/test/groovy/' : '\t- src/test/java/'
+        log.indentLog(packageTestStr + packageName.replaceAll("\\.", "\\/") + ' : Your test package')
         log.indentLog('\t- src/test/resources : Your test resources')
     }
 

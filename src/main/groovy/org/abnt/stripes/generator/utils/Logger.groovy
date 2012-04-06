@@ -10,6 +10,6 @@ class Logger {
     }
 
     void indentLog(String message){
-        println """| $message \n"""
+        println """| $message"""
     }
 }
