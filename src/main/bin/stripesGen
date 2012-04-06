@@ -1,0 +1,12 @@
+#!/bin/sh
+
+#
+# stripesGen launcher script
+#
+
+if [ -z "$STRIPESGEN_HOME" ] ; then
+	# must be set !
+	echo "the STRIPESGEN_HOME environment variable must be set"
+else
+	java -cp $STRIPESGEN_HOME/lib/groovy-all-1.7.4.jar:$STRIPESGEN_HOME/lib/stripes-generator-1.0.jar org.abnt.stripes.generator.StripesGenerator "$@"
+fi
