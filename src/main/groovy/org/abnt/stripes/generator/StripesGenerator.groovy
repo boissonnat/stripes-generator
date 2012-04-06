@@ -22,7 +22,7 @@ class StripesGenerator {
             println 'Try `stripes --help` for more information.'
 
         }else {
-
+            boolean verbose = false
             for (int i=0 ; i<args.length ; i++) {
                 String a = args[i]
 
@@ -34,7 +34,6 @@ class StripesGenerator {
                     println '\t -v :\t\tSwitch into verbose mode'
                     break
                 } else {
-                    boolean verbose = false
                     if (a == '-v'){
                         // Run in verbose mode
                         verbose = true
