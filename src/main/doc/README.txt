@@ -26,7 +26,7 @@ Add stripesGen to your PATH environment variable :
   bash$ export PATH=$PATH:$STRIPESGEN_HOME/bin
 
 
-You're ready to go ! To try your install, cd in any folder and type csv2xml :
+You're ready to go ! To try your install, cd in any folder and type stripesGen :
 
   bash$ cd /tmp
   bash$ stripesGen
