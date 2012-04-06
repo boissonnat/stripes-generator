@@ -11,8 +11,45 @@ class StripesGenerator {
   ____) | |_| |  | | |_) |  __|__ \\ |__| |  __/ | | |
  |_____/ \\__|_|  |_| .__/ \\___|___/\\_____|\\___|_| |_|
                    | |
-                   |_| Version 1.0 powered by Alex
+                   |_|            Version 1.0 powered by Alex
 ----------------------------------------------------------------------------
 """
+
+        // Check Arguments
+        if (!args) {
+            // No arguments -> Error
+            println 'stripesGen: missing argument'
+            println 'Try `stripes --help` for more information.'
+
+        }else {
+
+            for (int i=0 ; i<args.length ; i++) {
+                String a = args[i]
+
+                if (a == '-h' || a == '--help'){
+                    // Display Help
+                    println 'Usage: stripesGen [OPTION]... init'
+                    println '\t --help :\t\tDisplay help'
+                    println '\t -h :\t\tDisplay help'
+                    println '\t -v :\t\tSwitch into verbose mode'
+                    break
+                } else {
+                    boolean verbose = false
+                    if (a == '-v'){
+                        // Run in verbose mode
+                        verbose = true
+                    }else{
+                        if(a == 'init'){
+                            Runner runner = new Runner(verbose)
+                            runner.execute()
+                        }else{
+                            // Wrong arguments -> Error
+                            println 'stripesGen: unknown argument'
+                            println 'Try `stripes --help` for more information.'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
