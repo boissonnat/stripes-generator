@@ -15,6 +15,8 @@ class Runner {
     String versionNumber
     boolean useGroovy
 
+    String actionBeanPath
+
     Runner(boolean verbose) {
         this.verbose = verbose
         log = new Logger()
@@ -35,6 +37,7 @@ class Runner {
         createPom()
         createPackages()
         createResources()
+        createWebXml()
 
         println '\n'
         log.indentLog('A new Stripes project has been created : ')
@@ -76,7 +79,7 @@ class Runner {
 
         String srcPath = srcBasePath + File.separator+packageName.replaceAll("\\.", "\\"+File.separator)
         String testPath = testBasePath + File.separator+packageName.replaceAll("\\.", "\\"+File.separator)
-        String actionBeanPath = srcPath+File.separator+'actions'
+        actionBeanPath = srcPath+File.separator+'actions'
 
         String srcResources = artifactId + File.separator + 'src'+File.separator+'main'+File.separator+'resources'
         String testResources = artifactId + File.separator + 'src'+File.separator+'test'+File.separator+'resources'
@@ -131,6 +134,21 @@ class Runner {
         if(french)
             log.indentLog('\t- French language is available : /src/main/resources/StripesResources_fr.properties')
 
+    }
+
+    private void createWebXml(){
+        def binding = [:]
+        binding['packageActions'] = packageName+'.actions'
+        binding['packageStripesExt'] = packageName+'.stripes.ext'
+        binding['packageSecurityManager'] = packageName+'.stripes.noext.MySecurityManager'
+        binding['packageMyInitListener'] = packageName+'.stripes.noext.MyInitListener'
+
+        FileWriter writerDefault = new FileWriter(artifactId+File.separator+'src/main/webapp/WEB-INF/web.xml')
+        generateTemplate(binding, 'web-xml', false, writerDefault)
+        // Summary
+        println '\n'
+        log.indentLog('web.xml file generated :')
+        log.indentLog('\t- /src/main/webapp/WEB-INF/web.xml')
     }
 
     /***********************/
