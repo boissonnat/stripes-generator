@@ -185,17 +185,17 @@ class Runner {
         def binding = [:]
         binding["packageActions"] = packageName+'.actions'
         FileWriter writerBase
+        FileWriter writerHome
         if (useGroovy) {
             writerBase = new FileWriter(actionBeanPath+File.separator+'BaseActionBean.groovy')
-//            FileWriter writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.groovy')
-//            generateTemplate(binding, 'home-actionbean', false, writerHome)
+            writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.groovy')
         }else{
             writerBase = new FileWriter(actionBeanPath+File.separator+'BaseActionBean.java')
-//            FileWriter writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.java')
-//            generateTemplate(binding, 'home-actionbean', false, writerHome)
+            writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.java')
         }
 
-        generateTemplate(binding, 'base-actionbean', false, writerBase)
+        generateTemplate(binding, 'base-actionbean', useGroovy, writerBase)
+        generateTemplate(binding, 'home-actionbean', useGroovy, writerHome)
 
 
         // Summary
