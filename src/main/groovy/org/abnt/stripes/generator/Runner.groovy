@@ -38,6 +38,7 @@ class Runner {
         createPackages()
         createResources()
         createWebXml()
+        createInitListener()
 
         println '\n'
         log.indentLog('A new Stripes project has been created : ')
@@ -149,6 +150,11 @@ class Runner {
         println '\n'
         log.indentLog('web.xml file generated :')
         log.indentLog('\t- /src/main/webapp/WEB-INF/web.xml')
+    }
+
+    private void createInitListener(){
+        def binding = [:]
+        binding['package'] = packageName+'.stripes.noext'
     }
 
     /***********************/

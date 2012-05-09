@@ -12,19 +12,6 @@
             <param-value>$packageActions</param-value>
         </init-param>
         <init-param>
-            <param-name>Extension.Packages</param-name>
-            <param-value>
-                $packageStripesExt,
-                org.stripesstuff.plugin.security
-            </param-value>
-        </init-param>
-        <init-param>
-            <param-name>SecurityManager.Class</param-name>
-            <param-value>
-                $packageSecurityManager
-            </param-value>
-        </init-param>
-        <init-param>
             <param-name>LocalePicker.Locales</param-name>
             <param-value>en,fr</param-value>
         </init-param>
@@ -54,12 +41,6 @@
         <dispatcher>INCLUDE</dispatcher>
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
-
-    <listener>
-        <display-name>MyInitListener</display-name>
-        <listener-class>$packageMyInitListener</listener-class>
-    </listener>
-
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
