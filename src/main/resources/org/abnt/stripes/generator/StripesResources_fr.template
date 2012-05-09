@@ -60,3 +60,8 @@ validation.file.postBodyTooBig=La taille totale du fichier uploade {3} KB dépas
 ################################
 ## $artifactId resources here ##
 ################################
+
+application.header.title=$artifactId
+
+home.page.title=Bienvenue
+home.title=Yay !

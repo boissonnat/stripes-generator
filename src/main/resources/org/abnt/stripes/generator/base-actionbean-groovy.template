@@ -1,0 +1,15 @@
+package $packageActions
+
+import net.sourceforge.stripes.action.ActionBean
+import net.sourceforge.stripes.action.ActionBeanContext
+
+class BaseActionBean implements ActionBean {
+    private ActionBeanContext actionBeanContext;
+
+    ActionBeanContext getContext() {
+        actionBeanContext
+    }
+    void setContext(ActionBeanContext actionBeanContext) {
+        this.actionBeanContext = actionBeanContext
+    }
+}

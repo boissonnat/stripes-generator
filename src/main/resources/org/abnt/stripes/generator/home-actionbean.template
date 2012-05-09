@@ -1,0 +1,21 @@
+package $package;
+
+import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.UrlBinding;
+
+@UrlBinding("/Home")
+public class HomeActionBean extends BaseActionBean {
+
+    private static final String VIEW = "/WEB-INF/home.jsp";
+
+    @DefaultHandler
+    public Resolution view() {
+        return new ForwardResolution(VIEW);
+    }
+
+    public String getText(){
+        return "Hello world !"
+    }
+}

@@ -157,7 +157,7 @@
                 <version>6.1.10</version>
                 <configuration>
                     <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <contextPath>/valpro</contextPath>
+                    <contextPath>/$artifactId</contextPath>
                     <tmpDir>target/tmp</tmpDir>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>

@@ -14,7 +14,10 @@ class Runner {
     String packageName
     String versionNumber
     boolean useGroovy
-
+    String srcBasePath
+    String testBasePath
+    String jspFolder
+    String commonJspFolder
     String actionBeanPath
 
     Runner(boolean verbose) {
@@ -38,7 +41,8 @@ class Runner {
         createPackages()
         createResources()
         createWebXml()
-        createInitListener()
+        createJsp()
+        createActionBean()
 
         println '\n'
         log.indentLog('A new Stripes project has been created : ')
@@ -69,7 +73,7 @@ class Runner {
     }
 
     private void createPackages(){
-        String srcBasePath, testBasePath
+
         if (useGroovy){
             srcBasePath = artifactId + File.separator + 'src'+File.separator+'main'+File.separator+'groovy'
             testBasePath = artifactId + File.separator + 'src'+File.separator+'test'+File.separator+'groovy'
@@ -87,6 +91,9 @@ class Runner {
         String webApp = artifactId + File.separator + 'src'+File.separator+'main'+File.separator+'webapp'+
                 File.separator+'WEB-INF'
 
+        jspFolder = webApp + File.separator + 'jsp'
+        commonJspFolder = jspFolder + File.separator + 'common'
+
         if (!createDirectory(actionBeanPath)){
             log.error('An error occurs during the actionBean source directory creation')
         }
@@ -101,6 +108,13 @@ class Runner {
         }
         if (!createDirectory(webApp)){
             log.error('An error occurs during the webapp directory creation')
+        }
+
+        if (!createDirectory(jspFolder)){
+            log.error('An error occurs during the jsp directory creation')
+        }
+        if (!createDirectory(commonJspFolder)){
+            log.error('An error occurs during the commonJspFolder directory creation')
         }
 
         // Summary
@@ -152,9 +166,43 @@ class Runner {
         log.indentLog('\t- /src/main/webapp/WEB-INF/web.xml')
     }
 
-    private void createInitListener(){
+    private void createJsp(){
+        copyFile(this.class.getResourceAsStream('/index.jsp'), artifactId+File.separator+'src/main/webapp/index.jsp')
+        copyFile(this.class.getResourceAsStream('/home.jsp'), jspFolder + File.separator + 'home.jsp')
+        copyFile(this.class.getResourceAsStream('/layout.jsp'), commonJspFolder + File.separator + 'layout.jsp')
+        copyFile(this.class.getResourceAsStream('/taglibs.jsp'), commonJspFolder + File.separator + 'taglibs.jsp')
+
+        // Summary
+        println '\n'
+        log.indentLog('Jsp\'s files have been generated :')
+        log.indentLog('\t- /src/main/webapp/index.jsp')
+        log.indentLog('\t- /src/main/webapp/jsp/home.jsp')
+        log.indentLog('\t- /src/main/webapp/jsp/common/layout.jsp')
+        log.indentLog('\t- /src/main/webapp/jsp/common/taglibs.jsp')
+    }
+
+    private void createActionBean(){
         def binding = [:]
-        binding['package'] = packageName+'.stripes.noext'
+        binding["packageActions"] = packageName+'.actions'
+        FileWriter writerBase
+        if (useGroovy) {
+            writerBase = new FileWriter(actionBeanPath+File.separator+'BaseActionBean.groovy')
+//            FileWriter writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.groovy')
+//            generateTemplate(binding, 'home-actionbean', false, writerHome)
+        }else{
+            writerBase = new FileWriter(actionBeanPath+File.separator+'BaseActionBean.java')
+//            FileWriter writerHome = new FileWriter(actionBeanPath+File.separator+'HomeActionBean.java')
+//            generateTemplate(binding, 'home-actionbean', false, writerHome)
+        }
+
+        generateTemplate(binding, 'base-actionbean', false, writerBase)
+
+
+        // Summary
+        println '\n'
+        log.indentLog('ActionBeans have been generated:')
+        log.indentLog('\t- BaseActionBean')
+        log.indentLog('\t- HomeActionBean')
     }
 
     /***********************/
@@ -164,6 +212,10 @@ class Runner {
     private boolean createDirectory(String path){
         File dir = new File(path)
         return dir.mkdirs()
+    }
+
+    private void copyFile(InputStream srcAsInputStream, String dest){
+        new File(dest) << srcAsInputStream
     }
 
     private void generateTemplate(Map binding, String templateName, boolean useGroovy, Writer out){

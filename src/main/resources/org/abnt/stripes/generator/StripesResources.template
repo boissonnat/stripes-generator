@@ -60,3 +60,8 @@ validation.file.postBodyTooBig=Total upload size of {3} KB exceeds the maximum s
 ################################
 ## $artifactId resources here ##
 ################################
+
+application.header.title=$artifactId
+
+home.page.title=Welcome
+home.title=Yay !
