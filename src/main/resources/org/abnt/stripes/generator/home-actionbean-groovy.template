@@ -1,14 +1,14 @@
-package $package
+package $packageActions
 
 import net.sourceforge.stripes.action.DefaultHandler
 import net.sourceforge.stripes.action.ForwardResolution
 import net.sourceforge.stripes.action.Resolution
 import net.sourceforge.stripes.action.UrlBinding
 
-@UrlBinding('/Home')
+@UrlBinding('/home')
 public class HomeActionBean extends BaseActionBean {
 
-    private static final String VIEW = '/WEB-INF/home.jsp'
+    private static final String VIEW = '/WEB-INF/jsp/home.jsp'
 
     @DefaultHandler
     Resolution view() {

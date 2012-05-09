@@ -58,10 +58,9 @@ class Runner {
         binding['artifactId'] = artifactId
         binding['groupId'] = groupId
         binding['versionNumber'] = versionNumber
-        binding['useGroovy'] = useGroovy
 
         FileWriter writer = new FileWriter(artifactId+File.separator+'pom.xml')
-        generateTemplate(binding, 'pom-xml', false, writer)
+        generateTemplate(binding, 'pom-xml', useGroovy, writer)
 
         // Summary
         println '\n'
