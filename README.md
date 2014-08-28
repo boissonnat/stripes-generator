@@ -1,5 +1,5 @@
-# StripesGenerator - Generate basic Stripes project with all good stuff already configured
-
+# StripesGenerator 
+### Generate basic Stripes project with all good stuff already configured
 
 Utility that allows to generate Stripes web application with all good stuff already configured
 Full doc, bug reports, contrib, etc. at :
